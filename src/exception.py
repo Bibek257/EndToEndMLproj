@@ -1,9 +1,9 @@
 import sys
 import types
 import warnings
-import logging
+# import logging
 
-from logger import logging  
+from .logger import logging 
 # Suppress deprecation warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
@@ -42,14 +42,8 @@ class CustomException(Exception):
 
 
 if __name__ == "__main__":
-    # Example fallback logging config (if logger.py isn't loaded)
-    logging.basicConfig(
-        filename="error.log",
-        level=logging.INFO,
-        format="[%(asctime)s] %(name)s %(levelname)s: %(message)s"
-    )
-
     try:
         a = 1 / 0  # Intentional error for testing
     except Exception as e:
+        logging.info("An error occurred in the main block.")
         raise CustomException(e, sys)
